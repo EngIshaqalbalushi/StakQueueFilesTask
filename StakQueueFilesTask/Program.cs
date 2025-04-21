@@ -14,8 +14,8 @@ namespace StakQueueFilesTask
 
             // EvaluatePostfixExpression();
 
-            RotateQueueElementsbyK();
-
+            //RotateQueueElementsbyK();
+            SortQueueUsingOnlyQueueOperations();
 
 
 
@@ -120,8 +120,64 @@ namespace StakQueueFilesTask
             Console.WriteLine();
         }
 
+        // Sort a Queue Using Only Queue Operations
+
+        public static void SortQueueUsingOnlyQueueOperations()
+        {
+            Queue<int> queueA = new Queue<int>();
+            Queue<int> queueB = new Queue<int>();
+            
+           
+            int count = 1;
 
 
+            do
+            {
+                Console.WriteLine("Enter number " + count + "  ");
+                int number1 = int.Parse(Console.ReadLine());
+                count++;
+
+                queueA.Enqueue(number1);
+            } while (count <= 5);
+
+
+            Console.WriteLine("odd queue") ;
+            foreach(int i in queueA)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+
+
+            queueB.Enqueue(queueA.Dequeue());
+            while (queueA.Count > 0)
+            {
+                int next = queueA.Dequeue();
+                for (int i = 0; i < queueB.Count; ++i)
+                {
+                    if (queueB.Peek() < next)
+                    {
+                        queueB.Enqueue(queueB.Dequeue());
+                    }
+                    else
+                    {
+                        queueB.Enqueue(next);
+                        next = queueB.Dequeue();
+                    }
+                }
+                queueB.Enqueue(next);
+            }
+
+            foreach(int i in queueB)
+            {
+                Console.Write(i + " ");
+            }
+
+
+
+
+
+        }
 
 
 
