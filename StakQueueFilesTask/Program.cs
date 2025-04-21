@@ -1,6 +1,7 @@
 ﻿using System;
 
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace StakQueueFilesTask
 {
@@ -15,8 +16,8 @@ namespace StakQueueFilesTask
             // EvaluatePostfixExpression();
 
             //RotateQueueElementsbyK();
-            SortQueueUsingOnlyQueueOperations();
-
+            //SortQueueUsingOnlyQueueOperations();
+            //SlidingWindowMaximumUsingQueue();
 
 
         }
@@ -52,26 +53,68 @@ namespace StakQueueFilesTask
         
         
         {
-            Stack<string> ReverseName = new Stack<string>();
+            Stack<int> stack = new Stack<int>();
+
+            Console.WriteLine("Enter postfix expression (e.g. 5 3 + 8 *):");
+            string input = Console.ReadLine();
+
+            int i = 0;
+
+            while (i < input.Length)
+            {
+                char ch = input[i];
+
+                if (ch == ' ')
+                {
+                    i++;
+                    continue;
+                }
+
+                // If digit, parse full number (could be multi-digit)
+                if (char.IsDigit(ch))
+                {
+                    int num = 0;
+                    while (i < input.Length && char.IsDigit(input[i]))
+                    {
+                        num = num * 10 + (input[i] - '0');
+                        i++;
+                    }
+                    stack.Push(num);
+                }
+                else
+                {
+                    // It's an operator
+                    int b = stack.Pop();
+                    int a = stack.Pop();
+
+                    switch (ch)
+                    {
+                        case '+':
+                            stack.Push(a + b);
+                            break;
+                        case '-':
+                            stack.Push(a - b);
+                            break;
+                        case '*':
+                            stack.Push(a * b);
+                            break;
+                        case '/':
+                            stack.Push(a / b);
+                            break;
+                        default:
+                            Console.WriteLine($"Unsupported operator: {ch}");
+                            return;
+                    }
+
+                    i++; // Move past the operator
+                }
+            }
+
+            // Final result
+            Console.WriteLine("Result: " + stack.Pop());
 
 
-            Console.WriteLine("Enter Nuber 1 ");
-            int Number1 =int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter Number ");
-            int Number2 = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter Expression ");
-            string Expression = Console.ReadLine();
-
-            Console.WriteLine("Enter Number ");
-            int Number3 = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter Expression ");
-            string Expression1 = Console.ReadLine();
-       
-       
-        
         }
 
 
@@ -179,7 +222,57 @@ namespace StakQueueFilesTask
 
         }
 
+        // Sliding Window Maximum Using Queue
+        public static void SlidingWindowMaximumUsingQueue()
+        {
+            Console.WriteLine("Enter  number  ");
+            int n = int.Parse(Console.ReadLine());
 
+            int[] arr = new int[n];
+
+            Console.WriteLine("Enter the elements:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Element " + (i + 1) + ": ");
+                arr[i] = int.Parse(Console.ReadLine());
+            }
+
+            Console.Write("enter  k: ");
+            int k = int.Parse(Console.ReadLine());
+
+            if (k > n || k <= 0)
+            {
+                Console.WriteLine("invalid value of k");
+                return;
+            }
+
+            Queue<int> result = new Queue<int>();
+
+
+
+            for (int i = 0; i <= n - k; i++)
+            {
+                int max = arr[i];
+                for (int j = 1; j < k; j++)
+                {
+                    if (arr[i + j] > max)
+                    {
+                        max = arr[i + j];
+                    }
+                }
+                result.Enqueue(max);
+            }
+
+            Console.WriteLine("Maximum of each subarray of size " + k + ":");
+            foreach (int max in result)
+            {
+                Console.Write(max + " ");
+            }
+
+            Console.WriteLine();
+
+        }
 
     }
 }
+
