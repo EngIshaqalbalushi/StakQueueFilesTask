@@ -89,17 +89,22 @@ namespace StakQueueFilesTask
             do
             {
                 Console.WriteLine("Enter Name ");
-                int number = int.Parse(Console.ReadLine());
+                int number1 = int.Parse(Console.ReadLine());
                 count++;
 
-                numbers.Enqueue(number);
+                numbers.Enqueue(number1);
             } while (count < 5);
 
 
-            Console.WriteLine(numbers.Count);
+            //Console.WriteLine(numbers.Count);
 
+            Console.WriteLine("Enter Name ");
+            int number = int.Parse(Console.ReadLine());
 
-
+            for(int i = 0; i < number; i++)
+            {
+               // int newQueue=
+            }
 
 
         }
