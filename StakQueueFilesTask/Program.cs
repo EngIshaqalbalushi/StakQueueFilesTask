@@ -81,32 +81,43 @@ namespace StakQueueFilesTask
 
 
         public static void RotateQueueElementsbyK()
-        
         {
             Queue<int> numbers = new Queue<int>();
-            int count = 0;
+            int count = 1;
 
             do
             {
-                Console.WriteLine("Enter Name ");
+                Console.WriteLine("Enter number " + count + "  ");
                 int number1 = int.Parse(Console.ReadLine());
                 count++;
 
                 numbers.Enqueue(number1);
-            } while (count < 5);
+            } while (count <= 5);
 
-
-            //Console.WriteLine(numbers.Count);
-
-            Console.WriteLine("Enter Name ");
-            int number = int.Parse(Console.ReadLine());
-
-            for(int i = 0; i < number; i++)
+            Console.Write("main queue: ");
+            foreach (int i in numbers)
             {
-               // int newQueue=
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+
+            Console.Write("Enter k ");
+            int rotations = int.Parse(Console.ReadLine());
+            
+
+            for (int i = 0; i < rotations; i++)
+            {
+                int rotate = numbers.Dequeue();
+
+                numbers.Enqueue(rotate);
             }
 
-
+            Console.Write("new queue: ");
+            foreach (int i in numbers)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
         }
 
 
