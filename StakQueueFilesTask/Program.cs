@@ -19,14 +19,21 @@ namespace StakQueueFilesTask
 
             //RotateQueueElementsbyK();
             //SortQueueUsingOnlyQueueOperations();
+
             //SlidingWindowMaximumUsingQueue();
 
             //  WriteNamesFile();
 
 
-            SearchForWordFile();
-
+            //SearchForWordFile();
+            // SearchForWordFile1();
+            CountLinesWordsCharacters();
         }
+
+
+
+
+
         // Reverse a String Using Stack
 
         public static void ReverseStringUsingStack()
@@ -305,71 +312,52 @@ namespace StakQueueFilesTask
         // Search for a Word in a File
 
 
-        public static void SearchForWordFile()
+   
+        public static void SearchForWordFile1()
         {
-            string path = "C:\\Users\\Codeline\\Desktop\\k.com.txt";
+            Console.WriteLine("Enter Word : ");
 
+            string wordToSearch = Console.ReadLine().Trim();
 
-
-
-            if (File.Exists(path))
+            foreach (string line in System.IO.File.ReadAllLines("C:\\Users\\Codeline\\Desktop\\k.com.txt"))
             {
-                // Writing to a file using StreamWriter
-                using (StreamReader reader = new StreamReader(path, true))
+                if (line.IndexOf(wordToSearch, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
+                    Console.Write("Word is found ");
 
+                    Console.Write(line);
+                }
+                else
+                {
+                    Console.WriteLine("Word not found.");
 
-                    Console.WriteLine("Enter Word : ");
-                    string word = Console.ReadLine().Trim();
-
-                    string content = reader.ReadToEnd(); // Reads the entire file
-
-                   
-
-                    if (word == content)
-                    {
-
-                        Console.WriteLine("Word is found.");
-
-                        Console.WriteLine(content);
-
-                    }
-                    else
-                    {
-
-                        Console.WriteLine("Word not found.");
-
-
-                    }
                 }
             }
-            else
-            {
-                Console.WriteLine("File not found.");
-
-            }
 
 
 
+        }
 
-                Console.WriteLine("Text written to file.");
-            }
+        //Count Lines, Words, and Characters
 
+        public static void CountLinesWordsCharacters()
+        {
+            
+            //
+            int Count = File.ReadAllLines("C:\\Users\\Codeline\\Desktop\\k.com.txt").Length;
+            //
+            string readFile = File.ReadAllText("C:\\Users\\Codeline\\Desktop\\k.com.txt");
+            var str = readFile.Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            //
+            string filePath = @"C:\Users\Codeline\Desktop\k.com.txt";
+            string fileContent = File.ReadAllText(filePath);
+            string fileText = new StreamReader(filePath).ReadToEnd();
+            int charCount = fileText.Length;
+            //
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            Console.WriteLine("Number of words: " + str.Length);
+            Console.WriteLine("Count " + Count);
+            Console.WriteLine("number of characters " + charCount);
 
 
         }
@@ -382,6 +370,11 @@ namespace StakQueueFilesTask
 
 
 
+
     }
+
+
+
+}
 
 
