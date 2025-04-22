@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Reflection.PortableExecutable;
 
 namespace StakQueueFilesTask
 {
@@ -19,6 +21,10 @@ namespace StakQueueFilesTask
             //SortQueueUsingOnlyQueueOperations();
             //SlidingWindowMaximumUsingQueue();
 
+            //  WriteNamesFile();
+
+
+            SearchForWordFile();
 
         }
         // Reverse a String Using Stack
@@ -273,6 +279,109 @@ namespace StakQueueFilesTask
 
         }
 
+
+
+
+        // Write Names to File
+
+        public static void WriteNamesFile()
+        {
+            string path = "C:\\Users\\Codeline\\Desktop\\k.com.txt";
+            // Writing to a file using StreamWriter
+            using (StreamWriter writer = new StreamWriter(path,true))
+            {
+              
+                for(int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine("Enter Name : ");
+                    string name = Console.ReadLine();
+                    writer.WriteLine(name);
+                }
+            }
+            Console.WriteLine("Text written to file.");
+        }
+
+
+        // Search for a Word in a File
+
+
+        public static void SearchForWordFile()
+        {
+            string path = "C:\\Users\\Codeline\\Desktop\\k.com.txt";
+
+
+
+
+            if (File.Exists(path))
+            {
+                // Writing to a file using StreamWriter
+                using (StreamReader reader = new StreamReader(path, true))
+                {
+
+
+                    Console.WriteLine("Enter Word : ");
+                    string word = Console.ReadLine().Trim();
+
+                    string content = reader.ReadToEnd(); // Reads the entire file
+
+                   
+
+                    if (word == content)
+                    {
+
+                        Console.WriteLine("Word is found.");
+
+                        Console.WriteLine(content);
+
+                    }
+                    else
+                    {
+
+                        Console.WriteLine("Word not found.");
+
+
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("File not found.");
+
+            }
+
+
+
+
+                Console.WriteLine("Text written to file.");
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
     }
-}
+
 
